@@ -1,0 +1,47 @@
+body {
+    background-color: skyblue;
+}
+
+/* Form styles */
+.form-label.required {
+    position: relative;
+}
+
+.form-label.required::after {
+    content: "*";
+    color: red;
+    margin-left: 4px;
+}
+.form-error-message {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.no-products-message {
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.no-products-alert {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+/* Add any other global styles here */
+
+/* Inline form styles */
+form.d-inline {
+    display: inline-block !important;
+    margin-left: 0.25rem;
+}
+
+/* Button spacing in table */
+.table td .btn + .btn,
+.table td .btn + form,
+.table td form + .btn {
+    margin-left: 0.25rem;
+}

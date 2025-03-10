@@ -1,0 +1,92 @@
+nelmio_api_doc:
+    documentation:
+        servers:
+            - url: http://localhost:8000
+              description: Local server
+        info:
+            title: Product API
+            description: API for managing products
+            version: 1.0.0
+        paths:
+            /api/v1/products:
+                get:
+                    tags:
+                        - Products
+                    summary: List all products
+                    parameters:
+                        - name: page
+                          in: query
+                          description: Page number
+                          schema:
+                            type: integer
+                        - name: limit
+                          in: query
+                          description: Items per page
+                          schema:
+                            type: integer
+                        - name: category
+                          in: query
+                          description: Filter by category
+                          schema:
+                            type: string
+                            enum: ["ELECTRONICS", "CLOTHING", "BOOKS"]
+                    responses:
+                        '200':
+                            description: Returns the list of products
+            /api/v1/products/{uuid}:
+                get:
+                    tags:
+                        - Products
+                    summary: Get a single product
+                    parameters:
+                        - name: uuid
+                          in: path
+                          required: true
+                          description: Product UUID
+                          schema:
+                            type: string
+                            format: uuid
+                    responses:
+                        '200':
+                            description: Returns a product
+                        '404':
+                            description: Product not found
+        components:
+            schemas:
+                Product:
+                    type: object
+                    properties:
+                        uuid:
+                            type: string
+                            format: uuid
+                            example: "123e4567-e89b-12d3-a456-426614174000"
+                        title:
+                            type: string
+                            example: "Product Title"
+                        shortDescription:
+                            type: string
+                            example: "Product description"
+                        priceExclVat:
+                            type: number
+                            format: float
+                            example: 99.99
+                        category:
+                            type: string
+                            enum: ["ELECTRONICS", "CLOTHING", "BOOKS"]
+                        imageFilename:
+                            type: string
+                            example: "product-image.jpg"
+                        quantity:
+                            type: integer
+                            example: 10
+                        sku:
+                            type: string
+                            example: "PROD123"
+            securitySchemes:
+                Bearer:
+                    type: http
+                    scheme: bearer
+                    bearerFormat: JWT
+    areas:
+        path_patterns:
+            - ^/api/v1 

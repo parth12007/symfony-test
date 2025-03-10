@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ product.title }}{% endblock %}
+
+{% block body %}
+    <div class="card mb-4">
+        <div class="row g-0">
+            {% if product.imageFilename %}
+                <div class="col-md-4">
+                    <img src="{{ asset('uploads/products/' ~ product.imageFilename) }}" 
+                         class="img-fluid rounded-start" 
+                         alt="{{ product.title }}">
+                </div>
+            {% endif %}
+            <div class="col-md-8">
+                <div class="card-body">
+                    <div class="badge bg-secondary mb-2">{{ product.category.value }}</div>
+                    <h1 class="card-title">{{ product.title }}</h1>
+                    <p class="card-text">{{ product.shortDescription }}</p>
+                    
+                    <div class="mt-4">
+                        <div class="d-flex align-items-center gap-3">
+                            <h3 class="mb-0">€{{ product.priceExclVat|number_format(2, '.', ',') }}</h3>
+                            {% if product.quantity > 0 %}
+                                <span class="badge bg-success">In Stock ({{ product.quantity }})</span>
+                            {% else %}
+                                <span class="badge bg-danger">Out of Stock</span>
+                            {% endif %}
+                        </div>
+                        {% if product.sku %}
+                            <small class="text-muted">SKU: {{ product.sku }}</small>
+                        {% endif %}
+                    </div>
+                    <h5 class="mb-3">Price: €{{ product.priceExclVat|number_format(2, '.', ',') }}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <a href="{{ path('app_product_list') }}" class="btn btn-outline-primary">
+        ← Back to Products
+    </a>
+{% endblock %} 
